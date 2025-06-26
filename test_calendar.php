@@ -1,16 +1,19 @@
 <?php
 // カレンダー表示
-$min_nen = 1950;
-$max_nen = 2099;
+$min_nen = 1950; // 最小年
+$max_nen = 2099; // 最大年
 
 // 対象年入力
 while (true) {
-    $in_nen = readline("対象年(1950～2099): ");
+    // 対象年の入力を促す
+    echo "対象年:({$min_nen}～{$max_nen}) ";
+    $in_nen = readline();
     if (!is_numeric($in_nen)) {
         echo "数字を入れて下さい。\n";
         continue;
     }
     $in_nen = (int)$in_nen;
+    // 入力値が範囲内かチェック
     if ($in_nen < $min_nen || $in_nen > $max_nen) {
         continue;
     }
@@ -19,12 +22,15 @@ while (true) {
 
 // 対象月入力
 while (true) {
-    $in_tuki = readline("対象月(01～12): ");
+    // 対象月の入力を促す
+    echo "対象月:(1～12) ";
+    $in_tuki = readline();
     if (!is_numeric($in_tuki)) {
         echo "数字を入れて下さい。\n";
         continue;
     }
     $in_tuki = (int)$in_tuki;
+    // 入力値が範囲内かチェック
     if ($in_tuki < 1 || $in_tuki > 12) {
         continue;
     }
@@ -36,7 +42,7 @@ function print_calendar($year, $month) {
     $weekdays = ['日', '月', '火', '水', '木', '金', '土'];
     echo "     {$year}年 {$month}月\n";
     foreach ($weekdays as $w) {
-        echo $w . " ";
+        echo "{$w} ";
     }
     echo "\n";
 
