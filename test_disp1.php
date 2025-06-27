@@ -1,14 +1,19 @@
 <?php
+global $end_kensu;
+$end_kensu = 9999; // 件数9999は特別な終了コード
+
 // 人数を入れる(0～9999)
 function input_kensu() {
     while (true) {
-        $in_kensu = readline("(End:9999) ");
+
+        $in_kensu = readline();
         if (!is_numeric($in_kensu) || strpos($in_kensu, ".") !== false) {
             echo "数字（整数）を入れて下さい。\n";
             continue;
         }
         $in_kensu = (int)$in_kensu;
         if ($in_kensu < 0 || $in_kensu > 9999) {
+            echo "0～9999の数字を入れて下さい。\n";
             continue;
         } else {
             return $in_kensu;
@@ -30,10 +35,10 @@ $index = 0;
 $max_index = 6; // 日付数は1週間(7日)
 
 while ($index <= $max_index) {
-    echo ($index + 1) . "日目は何件ですか？\n";
+    echo ($index + 1) . "日目は何件ですか？(終了=$end_kensu)\n";
     $in_kensu = input_kensu();
 
-    if ($in_kensu == 9999) {
+    if ($in_kensu == $end_kensu) {
         if ($index == 0) {
             $values = [0];
         }
