@@ -2,6 +2,8 @@
 // 辞書オブジェクト Test Source
 // jisyo_get関数
 function jisyo_get($f_name) {
+    global $english_words; // グローバル変数を使用
+
     // ファイルが存在するか確認
     if (file_exists($f_name)) {
         // ファイルを１行ずつ読み込んで英和辞書を作成
