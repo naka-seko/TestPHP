@@ -1,4 +1,17 @@
 <?php
+// ループ(while)
+$text = "";
+$end_text = "finish";
+
+while ($text !== $end_text) {
+    // 文字を入力する
+    echo $end_text . "と入力してください:";
+    $text = readline();
+
+    echo $text . " と入力されました。" . PHP_EOL;
+}
+echo "終了しました。" . PHP_EOL;
+
 // リストオブジェクト anc --> ABC
 $list_obj = ["apple", "orange", "banana"];
 foreach ($list_obj as $fruit_name) {
@@ -21,9 +34,4 @@ for ($i = 0; $i < strlen($str_obj); $i++) {
     echo $upper_letter . PHP_EOL;
 }
 
-// 辞書オブジェクト English --> Japanese
-$dict_obj = ["dog" => "犬", "cat" => "猫", "parrot" => "オウム"];
-foreach ($dict_obj as $english => $japanese) {
-    echo $english . " は " . $japanese . " です。" . PHP_EOL;
-}
 ?>
