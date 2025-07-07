@@ -1,3 +1,5 @@
-apple:りんご
-orange:みかん
-peach:もも
+apple,りんご
+peach,もも
+grape,ぶどう
+grapefruit,グレープフルーツ
+banana,スイートバナナ
