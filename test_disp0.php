@@ -1,4 +1,8 @@
 <?php
+// 年齢10歳以上、身長110cm以上とする
+$min_age = 10;
+$min_height = 110.0;
+
 function input_nenrei() {
     // 年齢は0～120歳までとする
     $min_age = 0;
@@ -45,10 +49,6 @@ function input_height() {
         }
     }
 }
-
-// ここでは、年齢10歳以上、身長110cm以上とする
-$min_age = 10;
-$min_height = 110.0;
 
 // 年齢と身長を入れる
 $age = input_nenrei();

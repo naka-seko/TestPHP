@@ -1,4 +1,13 @@
 <?php
+// グローバル変数
+$filename = 'jinji_data.txt'; // 人事データファイル名
+
+$jinji_data = []; // 人事データを格納する配列
+$lines = []; // ファイルの行を格納する配列
+
+$min_nenrei = 20; // 最小年齢
+$max_nenrei = 35; // 最大年齢
+
 // 人事データ読込関数
 function jinji_data_get($f_name) {
     global $jinji_data; // グローバル変数を使用
@@ -57,12 +66,6 @@ function input_nenrei() {
     }
 }
 // メイン
-// グローバル変数
-$filename = 'jinji_data.txt'; // 人事データファイル名
-$jinji_data = []; // 人事データを格納する配列
-$lines = []; // ファイルの行を格納する配列
-$min_nenrei = 20; // 最小年齢
-$max_nenrei = 35; // 最大年齢
 
 jinji_data_get($filename); // 人事データ読込＆配列セット
 echo "人事データを読み込みました。\n";
