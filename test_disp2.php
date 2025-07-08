@@ -2,7 +2,6 @@
 $filename = 'jisyo_fruit.txt'; // 読み書きファイル名
 $english_words = []; // 英和辞書を格納する配列
 
-// 辞書オブジェクト Test Source
 // jisyo_get関数
 function jisyo_get($f_name) {
     global $english_words; // グローバル変数を使用
@@ -21,7 +20,8 @@ function jisyo_get($f_name) {
         echo "ファイルが存在しません: $f_name" . PHP_EOL;
         exit;
     }
-    return $english_words;
+
+    return $english_words; // 配列を返す
 }
 
 // jisyo_put関数
@@ -41,7 +41,6 @@ function jisyo_put($f_name) {
         $item = $item . ',' . $english_words[$item];
         // ファイルに書き込む
         fwrite($file, $item . PHP_EOL);
-        echo $item . " を書き込みました。" . PHP_EOL;
     }
 
     // ファイルを閉じる
@@ -58,31 +57,70 @@ function disp_english_words($english_words) {
     }
 }
 
-// メイン
-jisyo_get($filename); // 英和辞書を取得
-disp_english_words($english_words);
+// 英和辞書を追加又は更新する関数
+function jisyo_henko($english_words) {
 
-// 英和辞書を追加
-$english_words["banana"] = "バナナ";
-disp_english_words($english_words);
+    // 入力メッセージ出力
+    echo "追加、又は更新する英単語を入力して下さい：" . PHP_EOL;
+    $key = trim(readline());
+    echo "続けて、日本語を入力して下さい：" . PHP_EOL;
+    $value = trim(readline());
 
-// 英和辞書を置換
-$english_words["banana"] = "スイートバナナ";
-disp_english_words($english_words);
+    // 更新又は追加処理（英単語の有無により）
+    if (array_key_exists($key, $english_words)) {
+        echo $key . "を更新します。" . PHP_EOL;
+        $english_words[$key] = $value;
+    } else {
+        echo $key . "を追加します。" . PHP_EOL;
+        $english_words[$key] = $value;
+    }
 
-// 英和辞書を削除
-unset($english_words["orange"]);
-disp_english_words($english_words);
-
-// 該当英和辞書を出力
-echo "英単語を入力してください：";
-$key = readline();
-
-if (array_key_exists($key, $english_words)) {
-    echo "日本語：" . $english_words[$key] . PHP_EOL;
-} else {
-    echo "その英単語に対する辞書は有りません。" . PHP_EOL;
+    return $english_words; // 配列を返す
 }
+
+//
+function jisyo_del($english_words) {
+    //
+    echo "削除英単語を入力して下さい：" . PHP_EOL;
+    $key = trim(readline());
+
+    //
+    if (array_key_exists($key, $english_words)) {
+        echo $key . "を削除します。" . PHP_EOL;
+        unset($english_words[$key]);
+    } else {
+        echo "その英単語に対する辞書は有りません。" . PHP_EOL;
+    }
+
+    return $english_words; // 配列を返す
+}
+
+// 該当英和辞書を出力する関数
+function jisyo_disp($english_words) {
+
+    // 該当英単語入力
+    echo "英単語を入力して下さい：";
+    $key = readline();
+
+    // 出力判定
+    if (array_key_exists($key, $english_words)) {
+        echo "日本語：" . $english_words[$key] . PHP_EOL;
+    } else {
+        echo "その英単語に対する辞書は有りません。" . PHP_EOL;
+    }
+}
+
+// メイン
+$english_words = jisyo_get($filename); // 英和辞書を取得
+disp_english_words($english_words);
+
+$english_words = jisyo_henko($english_words); // 英和辞書を追加又は更新
+disp_english_words($english_words);
+
+$english_words = jisyo_del($english_words); // 英和辞書を削除
+disp_english_words($english_words);
+
+jisyo_disp($english_words); // 該当辞書を表示
 
 jisyo_put($filename); // 英和辞書を書き込み
 
