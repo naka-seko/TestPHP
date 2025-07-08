@@ -1,13 +1,18 @@
 <?php
 $filename = 'jisyo_fruit.txt'; // 読み書きファイル名
+$filename_bk = 'jisyo_fruit-bk.txt'; // バックアップファイル名
 $english_words = []; // 英和辞書を格納する配列
 
 // jisyo_get関数
 function jisyo_get($f_name) {
+    global $filename_bk; // グローバル変数を使用
     global $english_words; // グローバル変数を使用
 
     // ファイルが存在するか確認
     if (file_exists($f_name)) {
+        // 既存ファイルをバックアップする
+        copy($f_name,$filename_bk);
+
         // ファイルを１行ずつ読み込んで英和辞書を作成
         $lines = file($f_name, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
         foreach ($lines as $line) {
