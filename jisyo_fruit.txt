@@ -1,5 +1,5 @@
-apple,りんご
 peach,もも
 grape,ぶどう
 grapefruit,グレープフルーツ
-banana,スイートバナナ
+banana,バナナ
+apple,グリーン
